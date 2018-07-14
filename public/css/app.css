@@ -1,0 +1,9 @@
+form input.error,
+form select.error {
+  border-color: #a94442;
+}
+
+form label.error {
+  color: #a94442;
+}
+

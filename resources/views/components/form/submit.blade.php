@@ -1,0 +1,1 @@
+<button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check"></i> {{ $text }}</button>

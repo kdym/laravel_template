@@ -1,0 +1,32 @@
+$.extend($.validator.messages, {
+    required: "Campo Obrigatório",
+    remote: "Por favor, corrija este campo.",
+    email: "E-mail inválido",
+    emailExists: "E-mail já cadastrado",
+    url: "Por favor, forne&ccedil;a uma URL v&aacute;lida.",
+    date: "Data inválida",
+    period: "Período inválido",
+    dateISO: "Por favor, forne&ccedil;a uma data v&aacute;lida (ISO).",
+    number: "Por favor, forne&ccedil;a um n&uacute;mero v&aacute;lido.",
+    digits: "Somente números",
+    creditcard: "Por favor, forne&ccedil;a um cart&atilde;o de cr&eacute;dito v&aacute;lido.",
+    equalTo: "Por favor, forne&ccedil;a o mesmo valor novamente.",
+    passwordConfirm: "Campo deve ser igual à senha",
+    invalidPassword: "Senha inválida",
+    accept: "Por favor, forne&ccedil;a um valor com uma extens&atilde;o v&aacute;lida.",
+    maxlength: jQuery.validator.format("Por favor, forne&ccedil;a n&atilde;o mais que {0} caracteres."),
+    minlength: jQuery.validator.format("Por favor, forne&ccedil;a ao menos {0} caracteres."),
+    rangelength: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1} caracteres de comprimento."),
+    range: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1}."),
+    max: jQuery.validator.format("Por favor, forne&ccedil;a um valor menor ou igual a {0}."),
+    min: jQuery.validator.format("Por favor, forne&ccedil;a um valor maior ou igual a {0}."),
+    pattern: 'Formato inválido',
+    filesize: 'Tamanho inválido (Máximo {0}MB)',
+});
+
+$.validator.patterns = {
+    cnpj: /\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}/,
+    cpf: /\d{3}\.\d{3}\.\d{3}\-\d{2}/,
+    telDDD: /\(\d{2}\) \d?\d{8}/,
+    cep: /\d{5}\-\d{3}/,
+};
