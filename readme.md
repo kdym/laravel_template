@@ -1,60 +1,100 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Template padrão para projetos Laravel
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Template padrão do Laravel utilizando o AdminLTE, com algumas funcionalidades pré-programadas e totalmente customizável.
 
-## About Laravel
+Versões utilizadas nesse projeto atualmente:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+- [Laravel 5.6](https://laravel.com/docs/5.6)
+- [AdminLTE 2](https://adminlte.io/themes/AdminLTE/index2.html)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Índice
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+- [Instalação](#install)
+- [Bibliotecas externas utilizadas](#vendors)
+- [Template](#template)
+- [Formulários](#forms)
 
-## Learning Laravel
+## <a name="install"></a>Instalação
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+- GIT Clone ou download do ZIP desse projeto
+- `composer install`
+- `npm install`
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+## <a name="vendors"></a>Bibliotecas externas utilizadas
 
-## Laravel Sponsors
+- [AdminLTE](https://adminlte.io/themes/AdminLTE/index2.html)
+- [Laravel Collective](https://laravelcollective.com/docs/master/html)
+- [jQuery Validation](https://jqueryvalidation.org/)
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+## <a name="template"></a>Template
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
+### Views
 
-## Contributing
+Todos as views dos templates foram exportadas pro diretório `/resources/views/vendor/adminlte`. Você pode alterar os templates se quiser.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Cores
 
-## Security Vulnerabilities
+As cores padrão utilizadas nos templates e demais funcionalidades do projeto estão em `/resources/assets/sass/_variables.scss`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Menu
 
-## License
+O layout do menu principal se encontra em `/resources/views/menus/main_menu.blade.php`. Ele utiliza as variáveis `$controller` e `$action` para identificar o Controller e o Action sendo utilizado na página atual. 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Área do Usuário
+
+A área do usuário é composta do nome do usuário atualmente logado e um botão para logout. Ao clicar no nome do usuário, será redirecionado para a página de Perfil. O arquivo se encontra em `/resources/views/user_area/user_area.blade.php`.
+
+## <a name="forms"></a>Formulários
+
+Os formulários já vêm pré-programados com um template padrão do [Twitter Bootstrap 3](https://getbootstrap.com/docs/3.3/). O template padrão de cada componente se encontra em `/resources/views/components/form`. Para alterar a chamada dos métodos e as variáveis utilizadas, altere as funções dentro de `/app/Providers/AppServiceProvider.php`.
+
+### restModel
+
+```php
+{{ Form::restModel($model, 'form-id', 'route-name', 'model-name', $attributes) }}
+```
+
+- `$model` - Model a ser usado
+- `form-id` - ID HTML do formulário (usado pro JQuery Validation)
+- **Opcional** `route-name` - nome da rota a ser utilizada
+- **Opcional** `model-name` - nome do Model a ser utilizado
+- **Opcional** `$attributes` - array com atributos a serem utilizados no form
+
+Cria um formulário baseado no padrão REST.
+
+O array `$attributes` é o mesmo utilizado na função `Form::model` ou `Form::open` do [Laravel Collective](https://laravelcollective.com/docs/master/html). 
+
+#### Exemplo de Insert com o Model User
+
+```php
+$user = new User;
+
+{{ Form::restModel($user, 'user-form') }}
+```
+
+A função abre uma tag Form com o método **POST**, um campo hidden para o token CSRF e um campo hidden com o nome ID vazio.
+
+A URL do form vai procurar por uma Named Route dentro de `/routes/web.php` do tipo `Route::post('/user', 'UsersController@storeUser')->name('users.store');`, por exemplo. O atributo `route-name` altera o `users` dentro do `->name()`.
+
+#### Exemplo de Update com o Model User
+
+```php
+$user = User::find($id);
+
+{{ Form::restModel($user, 'user-form') }}
+```
+
+A função abre uma tag Form com o método **PUT**, um campo hidden para o token CSRF e um campo hidden com o ID do Model.
+
+A URL do form vai procurar por uma Named Route dentro de `/routes/web.php` do tipo `Route::put('/user/{user}', 'UsersController@updateUser')->name('users.update');`, por exemplo. O atributo `route-name` altera o `users` dentro do `->name()`. O atributo `model-name` altera o `{user}` dentro do `put()`.
+
+### bsText
+
+```php
+{{ Form::bsText('name', 'label', $attributes, 'default') }}
+```
+
+- `name` - Nome do campo
+- `label` - Label do campo
+- **Opcional** `$attributes` - array com atributos a serem utilizados no input
+- **Opcional** `default` - valor padrão do campo
